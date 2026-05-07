@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --grid-size: 48px;
+  }
+
+  html, body {
+    @apply bg-ink-950 text-slate-100 antialiased;
+    background-image:
+      radial-gradient(900px 500px at 15% -10%, rgba(59, 80, 255, .18), transparent 60%),
+      radial-gradient(700px 400px at 85% 10%, rgba(139, 92, 246, .14), transparent 60%),
+      radial-gradient(800px 500px at 50% 110%, rgba(34, 211, 238, .10), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  body {
+    font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+  }
+
+  ::selection {
+    @apply bg-primary-500/40 text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #2530d4, #6d28d9);
+    border-radius: 999px;
+    border: 2px solid #05060d;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #3b50ff, #8b5cf6);
+  }
+
+  /* Autofill: keep dark surface */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #f8fafc;
+    -webkit-box-shadow: 0 0 0px 1000px rgba(16, 20, 42, 1) inset;
+    transition: background-color 9999s ease-in-out 0s;
+    caret-color: #f8fafc;
+  }
+}
+
+@layer components {
+  /* Faint cyber grid backdrop. Apply to a fixed div under the app. */
+  .grid-backdrop {
+    background-image:
+      linear-gradient(to right, rgba(139,160,255,.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(139,160,255,.06) 1px, transparent 1px);
+    background-size: var(--grid-size) var(--grid-size);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 80%);
+  }
+
+  /* Glassmorphism surface */
+  .glass {
+    @apply bg-white/[.03] backdrop-blur-xl border border-white/10;
+    box-shadow: 0 12px 40px -12px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.05);
+  }
+
+  .glass-strong {
+    @apply bg-white/[.05] backdrop-blur-2xl border border-white/10;
+    box-shadow: 0 20px 60px -16px rgba(0,0,0,.8), inset 0 1px 0 rgba(255,255,255,.08);
+  }
+
+  /* Animated gradient border (uses ::before mask trick) */
+  .gradient-border {
+    position: relative;
+    isolation: isolate;
+  }
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, #3b50ff, #8b5cf6, #22d3ee, #3b50ff);
+    background-size: 300% 300%;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+    animation: gradient-shift 8s ease infinite;
+  }
+
+  /* Animated text gradient */
+  .text-gradient {
+    background: linear-gradient(135deg, #93c5fd 0%, #c4b5fd 50%, #67e8f9 100%);
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+  }
+
+  /* Subtle vertical scan line over a container */
+  .scanline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 30%;
+    background: linear-gradient(to bottom, transparent, rgba(91,115,255,.12), transparent);
+    pointer-events: none;
+    animation: scan 4s ease-in-out infinite;
+  }
+
+  /* Premium button glow on hover */
+  .btn-glow {
+    position: relative;
+    isolation: isolate;
+    transition: transform .2s ease, box-shadow .3s ease;
+  }
+  .btn-glow::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, #3b50ff, #8b5cf6, #22d3ee);
+    background-size: 200% 200%;
+    filter: blur(14px);
+    opacity: 0;
+    transition: opacity .3s ease;
+    z-index: -1;
+  }
+  .btn-glow:hover::before {
+    opacity: .9;
+    animation: gradient-shift 4s ease infinite;
+  }
+  .btn-glow:hover {
+    transform: translateY(-1px);
+  }
+
+  /* Shimmer used during loading */
+  .shimmer {
+    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.08) 50%, transparent 70%);
+    background-size: 200% 100%;
+    animation: shimmer 2.4s linear infinite;
+  }
+}

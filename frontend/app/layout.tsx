@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { Header, Footer } from "@/components/ui/Header";
 import { ToastProvider } from "@/components/ui/Toast";
+import { AuthProvider } from "@/hooks/useAuth";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -17,12 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`dark ${inter.variable} ${jbmono.variable}`}>
       <body className="relative min-h-screen flex flex-col font-sans">
-        {/* Cyber grid backdrop */}
-        <div
-          aria-hidden
-          className="pointer-events-none fixed inset-0 -z-10 grid-backdrop"
-        />
-        {/* Aurora glows */}
+        <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 grid-backdrop" />
         <div
           aria-hidden
           className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[60vh]"
@@ -32,11 +28,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
 
-        <ToastProvider>
-          <Header />
-          <main className="relative flex-1">{children}</main>
-          <Footer />
-        </ToastProvider>
+        <AuthProvider>
+          <ToastProvider>
+            <Header />
+            <main className="relative flex-1">{children}</main>
+            <Footer />
+          </ToastProvider>
+        </AuthProvider>
       </body>
     </html>
   );

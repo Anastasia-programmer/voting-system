@@ -1,18 +1,16 @@
-# 🗳️ E-Voting System Backend
+# E-Voting System Backend
 
 This is a secure backend for an electronic voting system built with **Python (FastAPI)**. It includes authentication, cryptography modules, and voting services.
 
----
 
-# ⚙️ Requirements
+# Requirements
 
 - Python 3.10+
 - pip
 - virtual environment (venv)
 
----
 
-# 🚀 Setup & Installation
+# Setup & Installation
 
 ## 1. Clone the repository
 ```bash
@@ -20,14 +18,12 @@ git clone <your-repo-url>
 cd voting-system
 ```
 
----
 
 ## 2. Create virtual environment
 ```bash
 python -m venv venv
 ```
 
----
 
 ## 3. Activate virtual environment
 
@@ -41,16 +37,14 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
----
 
 ## 4. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
----
 
-# ▶️ Run the server
+#  Run the server
 
 Make sure you are in the project root folder, then run:
 
@@ -58,9 +52,8 @@ Make sure you are in the project root folder, then run:
 uvicorn app.main:app --reload
 ```
 
----
 
-# 🌐 API Access
+# API Access
 
 Once running, the server will be available at:
 
@@ -74,9 +67,8 @@ Swagger documentation:
 http://127.0.0.1:8000/docs
 ```
 
----
 
-# 📁 Project Structure
+# Project Structure
 
 ```
 app/
@@ -91,13 +83,12 @@ app/
 
 ---
 
-# ⚠️ Notes
+# Notes
 
 - Always activate `venv` before running the project
 - If dependencies fail, reinstall using `pip install -r requirements.txt`
 - If module import error happens, ensure you run from the **root folder**
 
----
 
-# 🧠 Author
+# Author
 Secure Voting Backend Project
